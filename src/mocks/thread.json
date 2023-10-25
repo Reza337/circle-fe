@@ -1,0 +1,46 @@
+[
+	{
+		"id": 1,
+		"author_picture": "https://img.freepik.com/free-photo/young-asian-woman-looks-with-confidence-cross-arms-chest-smiles-camera-stands-orange-sw_1258-167202.jpg?w=740&t=st=1698054607~exp=1698055207~hmac=888a6322744226e7c75a31430d9376f9f0d6c0339d617f59b1d788e66ea6a20b",
+		"author__name": "Indah Pra Karya",
+		"author_username": "indahpra",
+		"posted_at": "4h",
+		"content": "Kalian pernah ga sih bet on saving? jadi by calculation sebenernya kita gk survive sampe tanggal tertentu. Tapi entah gimana bisa aja gitu. Ada aja jalannya augmented reality real time puppet made. You can try it how went below in the thread",
+		"likes_count": 36,
+		"replies_count": 381,
+		"is_liked": true
+	},
+	{
+		"id": 2,
+		"author_picture": "https://img.freepik.com/free-photo/young-asian-woman-looks-with-confidence-cross-arms-chest-smiles-camera-stands-orange-sw_1258-167202.jpg?w=740&t=st=1698054607~exp=1698055207~hmac=888a6322744226e7c75a31430d9376f9f0d6c0339d617f59b1d788e66ea6a20b",
+		"author__name": "Muhammad Reza Fadilah",
+		"author_username": "rezafadilah",
+		"posted_at": "17h",
+		"content": "Pernah nggak dapet dream job terus lama - lama ngerasa lah kok tidak seperti yang diharapkan (atau simply lelah) terus fall out of love dengan job/bidang tsb?",
+		"likes_count": 293,
+		"replies_count": 381,
+		"is_liked": false
+	},
+	{
+		"id": 3,
+		"author_picture": "https://img.freepik.com/free-photo/young-asian-woman-looks-with-confidence-cross-arms-chest-smiles-camera-stands-orange-sw_1258-167202.jpg?w=740&t=st=1698054607~exp=1698055207~hmac=888a6322744226e7c75a31430d9376f9f0d6c0339d617f59b1d788e66ea6a20b",
+		"author__name": "Muhammad Reza Fadilah",
+		"author_username": "rezafadilah",
+		"posted_at": "4h",
+		"content": "Dibanding rekan2 media menginterview saya terkait issue yang lg ramai, ada baiknya mending interview instansi yg ngasih izin, BKSDA dll. Manfaatkan moment untuk mendorong regulasinya jadi lebih ketat.<br />Ketua mpr kita pak Bamsut juga pelihara singa, ga mau push berita ini aja?",
+		"likes_count": 293,
+		"replies_count": 381,
+		"is_liked": true
+	},
+	{
+		"id": 4,
+		"author_picture": "https://img.freepik.com/free-photo/young-asian-woman-looks-with-confidence-cross-arms-chest-smiles-camera-stands-orange-sw_1258-167202.jpg?w=740&t=st=1698054607~exp=1698055207~hmac=888a6322744226e7c75a31430d9376f9f0d6c0339d617f59b1d788e66ea6a20b",
+		"author__name": "Muhammad Reza Fadilah",
+		"author_username": "rezafadilah",
+		"posted_at": "4h",
+		"content": "Dibanding rekan2 media menginterview saya terkait issue yang lg ramai, ada baiknya mending interview instansi yg ngasih izin, BKSDA dll. Manfaatkan moment untuk mendorong regulasinya jadi lebih ketat.<br />Ketua mpr kita pak Bamsut juga pelihara singa, ga mau push berita ini aja?",
+		"likes_count": 293,
+		"replies_count": 381,
+		"is_liked": false
+	}
+]
