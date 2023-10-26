@@ -1,24 +1,25 @@
-import { Box, Avatar } from "@chakra-ui/react";
+import { threadsData } from "@/types/threadsType";
+import { Box, Avatar, Image } from "@chakra-ui/react";
 // import { FcLike } from "react-icons/fc";
-// import { LiaCommentSolid } from "react-icons/lia";
-// import { AiOutlineHeart } from "react-icons/ai";
+import { LiaCommentSolid } from "react-icons/lia";
+import { AiOutlineHeart } from "react-icons/ai";
 import { PiDotOutlineFill } from "react-icons/pi";
 
-type Threads = {
-	content: string;
-	image: string;
-	posted_at: string;
-	likes_count: number;
-	replies_count: number;
-	selecteduser: selecteduser;
-};
+// type Threads = {
+// 	content: string;
+// 	image: string;
+// 	posted_at: string;
+// 	likes_count: number;
+// 	replies_count: number;
+// 	selecteduser: selecteduser;
+// };
 
-type selecteduser = {
-	username?: string;
-	full_name?: string;
-	profile_picture?: string;
-};
-function Threads(props: Threads) {
+// type selecteduser = {
+// 	username?: string;
+// 	full_name?: string;
+// 	profile_picture?: string;
+// };
+function Threads(props: threadsData) {
 	// console.log(props);
 
 	return (
@@ -52,12 +53,19 @@ function Threads(props: Threads) {
 							</p>
 						</Box>
 						<p dangerouslySetInnerHTML={{ __html: props.content }}></p>
-						{/* <Box display={"flex"} gap={2} alignItems={"center"} fontSize={"l"}>
-							{is_liked ? <FcLike /> : <AiOutlineHeart />}
-							<p style={{ color: "#616161" }}>{likes_count}</p>
+						<Box w={"100%"} h={"auto"} py={5}>
+							<Image src={props.image} alt="Ini Gambar" w={"100%"} h={"auto"} />
+						</Box>
+						<Box
+							display={"flex"}
+							gap={4}
+							alignItems={"center"}
+							fontSize={"20px"}>
+							<AiOutlineHeart />
+							<p style={{ color: "#616161" }}>{props.likeToThread.length}</p>
 							<LiaCommentSolid />
-							<p style={{ color: "#616161" }}>{replies_count} Replies</p>
-						</Box> */}
+							<p style={{ color: "#616161" }}>{props.Reply.length} Replies</p>
+						</Box>
 					</div>
 				</Box>
 			</div>

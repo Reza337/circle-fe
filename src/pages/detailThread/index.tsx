@@ -1,3 +1,3 @@
-export default function index() {
+export default function DetaildThreads() {
 	return <div>index</div>;
 }

@@ -1,12 +1,7 @@
 // import { Footer } from "@/components/Footer";
 import Threads from "@/features/threads/components/Threads";
-import { useEffect, useState } from "react";
+// import { useEffect, useState } from "react";
 import {
-	HStack,
-	Input,
-	Avatar,
-	IconButton,
-	Button,
 	Box,
 	Flex,
 	Stack,
@@ -15,10 +10,12 @@ import {
 	GridItem,
 } from "@chakra-ui/react";
 import Navbar from "@/components/Navbar";
-import { BiImageAdd } from "react-icons/bi";
 import { API } from "@/libs/api";
 import Profile from "@/components/Myprofile";
 import { useQuery } from "@tanstack/react-query";
+import FormThreads from "@/components/FormThreads";
+import { threadsData } from "@/types/threadsType";
+import { useEffect } from "react";
 
 export default function Home() {
 	// const [threads, setThread] = useState<Threads[]>();
@@ -37,7 +34,7 @@ export default function Home() {
 	// 	getThreads();
 	// });
 
-	const { data: threads, refetch } = useQuery({
+	const { data: threads, refetch: refetchThreads } = useQuery({
 		queryKey: ["threads"],
 		queryFn: async () => {
 			const { data } = await API.get("/threads");
@@ -45,6 +42,10 @@ export default function Home() {
 		},
 	});
 	console.log(threads);
+
+	useEffect(() => {
+		refetchThreads();
+	}, [refetchThreads]);
 
 	return (
 		<Box>
@@ -64,27 +65,7 @@ export default function Home() {
 					bg="gray.800"
 					p="2rem">
 					<Flex direction="column" color={"gray.100"}>
-						<HStack maxW={"6xl"} alignItems={"center"} gap={5}>
-							<Avatar
-								w="50px"
-								h="50px"
-								name="Dan Abrahmov"
-								src="https://bit.ly/dan-abramov"
-								ml="10px"
-							/>
-							<Input
-								variant="flushed"
-								placeholder="What's on your mind"
-								w="90%"
-								py={2}
-								rounded={"xl"}
-								bg={"transparent"}
-							/>
-							<IconButton aria-label="Search database" icon={<BiImageAdd />} />
-							<Button bg="green" rounded={"full"} w="100px" py={1}>
-								Post
-							</Button>
-						</HStack>
+						<FormThreads />
 						<Stack
 							flex="1"
 							overflow="auto"
@@ -96,26 +77,24 @@ export default function Home() {
 									borderColor="gray.600"
 								/>
 							}>
-							{threads?.map((data: any) => (
+							{threads?.map((data: threadsData) => (
 								<Threads
 									key={data.id}
+									id={data.id}
 									content={data.content}
 									image={data.image}
 									posted_at={data.posted_at}
 									likes_count={data.likes_count}
 									replies_count={data.replies_count}
 									selecteduser={data.selecteduser}
+									likeToThread={data.likeToThread}
+									Reply={data.Reply}
 								/>
 							))}
 						</Stack>
 					</Flex>
 				</GridItem>
-				<GridItem
-					as="div"
-					bg="gray.800"
-					//   colSpan={2}
-					minHeight="100vh"
-					p="2rem">
+				<GridItem as="div" bg="gray.800" minHeight="100vh" p="2rem">
 					<Profile />
 				</GridItem>
 			</Grid>

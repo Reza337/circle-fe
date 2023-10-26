@@ -1,5 +1,6 @@
 import { extendBaseTheme, ChakraProvider } from "@chakra-ui/react";
 import Home from "./pages/home";
+import { Routes, Route } from "react-router-dom";
 
 const theme = extendBaseTheme({
 	styles: {
@@ -18,7 +19,10 @@ const theme = extendBaseTheme({
 function App() {
 	return (
 		<ChakraProvider theme={theme}>
-			<Home />
+			<Routes>
+				<Route path="/" element={<Home />} />
+				{/* <Route path="/detail-thread/:id" element={<DetaildThreads />} /> */}
+			</Routes>
 		</ChakraProvider>
 	);
 }
