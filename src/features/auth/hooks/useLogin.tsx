@@ -24,15 +24,37 @@ export function useLogin() {
 	async function handleLogin() {
 		try {
 			const response = await API.post("/auth/login", form);
-			console.log(response?.data);
-			// redux store redux
-			dispatch(AUTH_LOGIN(response?.data));
 
-			navigate("/");
+			if (response.status === 200) {
+				// Jika responsenya berhasil (status 200 OK), Anda dapat melakukan tindakan yang sesuai
+				dispatch(AUTH_LOGIN(response?.data));
+				navigate("/");
+			} else if (response.status === 401) {
+				// Jika responsenya adalah "Unauthorized" (status 401), token mungkin hilang atau tidak valid
+				// Lakukan sesuatu di sini, misalnya, tampilkan pesan kesalahan
+				console.log("Unauthorized: Missing or invalid token");
+			} else {
+				// Tindakan lain yang sesuai untuk kode tanggapan HTTP lainnya
+				console.log("HTTP Status Code:", response.status);
+			}
 		} catch (error) {
-			console.log(error);
+			// Menangani kesalahan jaringan atau kesalahan lainnya
+			console.log("Error:", error);
 		}
 	}
+
+	// async function handleLogin() {
+	// 	try {
+	// 		const response = await API.post("/auth/login", form);
+
+	// 		// redux store redux
+	// 		dispatch(AUTH_LOGIN(response?.data));
+
+	// 		navigate("/");
+	// 	} catch (error) {
+	// 		console.log(error);
+	// 	}
+	// }
 
 	return { form, handleChange, handleLogin };
 }

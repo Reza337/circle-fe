@@ -9,7 +9,7 @@ const initiaslState: IUser = {
 	full_name: "",
 	username: "",
 	email: "",
-	picture: "",
+	profile_picture: "",
 };
 
 export const authSlice = createSlice({
@@ -27,7 +27,7 @@ export const authSlice = createSlice({
 				full_name: payload.full_name,
 				username: payload.username,
 				email: payload.email,
-				picture: payload.picture,
+				profile_picture: payload.picture,
 			};
 
 			return user;
@@ -40,7 +40,7 @@ export const authSlice = createSlice({
 				full_name: payload.full_name,
 				username: payload.username,
 				email: payload.email,
-				picture: payload.picture,
+				profile_picture: payload.picture,
 			};
 
 			return user;

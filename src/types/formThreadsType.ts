@@ -1,5 +1,5 @@
 export type formThreads = {
 	content: string;
-	image: string;
+	image: Blob | MediaSource | string;
 	user: number;
 };

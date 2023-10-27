@@ -9,12 +9,12 @@ export default function Main({ children }: { children: ReactNode }) {
 		<>
 			<Box
 				display={"flex"}
-				width={"300px"}
+				width={"250px"}
 				height={"fit-content"}
 				position={"fixed"}
 				left={"30px"}
 				paddingTop={"30px"}
-				paddingRight={"30px"}
+				paddingRight={"10px"}
 				borderRight={"1px solid gray"}
 				h={"100vh"}>
 				<Box width={"100%"} display={"flex"} flexDirection={"column"} gap={2}>
@@ -29,10 +29,10 @@ export default function Main({ children }: { children: ReactNode }) {
 				flexDirection={"column"}
 				gap={5}
 				position={"fixed"}
-				right={"30px"}
+				right={"5px"}
 				top={"0px"}
 				paddingTop={"30px"}
-				paddingLeft={"30px"}
+				paddingLeft={"15px"}
 				borderLeft={"1px solid gray"}
 				h={"100vh"}>
 				<Box>

@@ -27,6 +27,8 @@ const theme = extendTheme({
 // setAuthToken => apakah sudah token ? akses : login/register
 function App() {
 	const auth = useSelector((state: RootState) => state.auth);
+	console.log(auth);
+
 	const [isLoading, setIsLoading] = useState<boolean>(true);
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
@@ -58,7 +60,7 @@ function App() {
 
 	// Private Root
 	function IsNotLogin() {
-		if (!auth.username) {
+		if (!localStorage.token) {
 			return <Navigate to="/auth/login" />;
 		} else {
 			return <Outlet />;
@@ -66,7 +68,7 @@ function App() {
 	}
 
 	function IsLogin() {
-		if (auth.username) {
+		if (localStorage.token) {
 			return <Navigate to="/" />;
 		} else {
 			return <Outlet />;
