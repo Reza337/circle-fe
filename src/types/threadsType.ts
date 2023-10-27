@@ -3,9 +3,7 @@ export type threadsData = {
 	content: string;
 	image: string;
 	posted_at: string;
-	likes_count: number;
-	replies_count: number;
-	selecteduser: {
+	user: {
 		username: string;
 		full_name: string;
 		profile_picture: string;

@@ -12,7 +12,7 @@ function Navbar() {
 					circle
 				</Text>
 				<ul>
-					<Box fontSize={"xl"}>
+					<Box fontSize={"xl"} color={"white"}>
 						<li
 							style={{
 								display: "flex",

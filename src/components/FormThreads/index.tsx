@@ -9,7 +9,7 @@ export default function FormThreads() {
 	const [formData, setFormData] = useState<formThreads>({
 		content: "",
 		image: "",
-		selecteduser: 1,
+		user: 1,
 	});
 
 	const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -46,14 +46,14 @@ export default function FormThreads() {
 			setFormData({
 				content: "",
 				image: "",
-				selecteduser: 1,
+				user: 1,
 			});
 		},
 	});
 
 	return (
 		<div>
-			<HStack maxW={"6xl"} alignItems={"center"} gap={5}>
+			<HStack maxW={"6xl"} alignItems={"center"} gap={5} color={"white"}>
 				<Avatar
 					w="50px"
 					h="50px"

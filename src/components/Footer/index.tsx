@@ -8,10 +8,10 @@ import {
 
 export function Footer() {
 	return (
-		<Card bg={"transparent"} border={"1px solid white"} color={"white"}>
+		<Card bg={"transparent"} border="1px solid white" color={"white"}>
 			<CardBody display={"flex"} alignItems={"center"} gap={2}>
 				<Text fontSize={"12px"} fontWeight={"bold"}>
-					Developed by Muhammad Reza Fadilah
+					Developed by Jhon Doe
 				</Text>
 				<AiFillGithub />
 				<AiFillLinkedin />
