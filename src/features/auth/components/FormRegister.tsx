@@ -22,11 +22,7 @@ export default function FormRegister() {
 			<Text fontSize={"2xl"} fontWeight={"bold"}>
 				Create Account Connect
 			</Text>
-			<Input
-				placeholder="First name"
-				name="full_name"
-				onChange={handleChange}
-			/>
+			<Input placeholder="Full Name" name="full_name" onChange={handleChange} />
 			<Input placeholder="Username" name="username" onChange={handleChange} />
 			<Input placeholder="Email" name="email" onChange={handleChange} />
 			<Input

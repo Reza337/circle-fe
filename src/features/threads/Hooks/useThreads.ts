@@ -1,37 +1,56 @@
 import { threadsData } from "@/types/threadsType";
 import { API } from "@/libs/api";
-import { ChangeEvent, FormEvent, useEffect, useRef, useState } from "react";
+import { ChangeEvent, useEffect, useRef, useState } from "react";
 // import { useQuery } from "@tanstack/react-query";
 import { formThreads } from "@/types/formThreadsType";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 export function useThreads() {
 	const [threads, setThreads] = useState<threadsData[]>();
 	const [form, setForm] = useState<formThreads>({
 		content: "",
 		image: "",
-		user: 1,
 	});
 
 	async function getThreads() {
 		const response = await API.get("/threads");
-		console.log("ini threads", response.data);
+		console.log("ini threads", response.data.data);
 		setThreads(response.data.data);
 	}
 
-	async function handlePost(event: FormEvent<HTMLFormElement>) {
-		event.preventDefault();
+	// async function handlePost(event: FormEvent<HTMLFormElement>) {
+	// 	event.preventDefault();
 
-		// console.log(form);
-		console.log("test image", form.image);
+	// 	// console.log(form);
+	// 	console.log("test image", form.image);
 
-		const formData = new FormData();
-		formData.append("content", form.content);
-		formData.append("image", form.image as File);
+	// 	const formData = new FormData();
+	// 	formData.append("content", form.content);
+	// 	formData.append("image", form.image as File);
 
-		const response = await API.post("/thread", formData);
-		console.log("berhasil menambahkan thread", response);
-		getThreads();
-	}
+	// 	const response = await API.post("/thread", formData);
+	// 	console.log("berhasil menambahkan thread", response);
+	// 	getThreads();
+	// }
+
+	const QueryClient = useQueryClient();
+
+	const { mutate, isPending } = useMutation({
+		mutationFn: () => {
+			const formData = new FormData();
+			formData.append("content", form.content);
+			formData.append("image", form.image as File);
+			return API.post("/thread", formData);
+		},
+
+		onSuccess() {
+			QueryClient.invalidateQueries({ queryKey: ["thread"] });
+			setForm({
+				content: "",
+				image: "",
+			});
+		},
+	});
 
 	useEffect(() => {
 		getThreads();
@@ -40,15 +59,6 @@ export function useThreads() {
 	useEffect(() => {
 		setThreads(threads);
 	}, [threads]);
-	// const handlePost = useMutation({
-	// 	mutationFn: async () => {
-	// 		// await API.post("/thread", form);
-	// 		const response = await API.post("/thread", form);
-	// 		console.log("Request:", response.config);
-	// 		console.log("Response:", response.data);
-	// 	},
-	// 	onSuccess: () => refetch(),
-	// });
 
 	function handleChange(event: ChangeEvent<HTMLInputElement>) {
 		const { name, value, files } = event.target;
@@ -76,7 +86,8 @@ export function useThreads() {
 		form,
 		threads,
 		handleChange,
-		handlePost,
 		fileInputRef,
+		mutate,
+		isPending,
 	};
 }

@@ -30,7 +30,7 @@ function Threads(props: threadsData) {
 								_hover={{
 									cursor: "pointer",
 								}}>
-								@{props.user?.full_name}
+								{props.user?.full_name}
 							</Text>
 						</Box>
 						<Box>
@@ -66,7 +66,7 @@ function Threads(props: threadsData) {
 							<Text fontSize="0.86rem">{props.content}</Text>
 						</Box>
 						<Box>
-							<HStack fontSize="xs">
+							<HStack fontSize="15px">
 								<HStack
 								// onClick={handleClick}
 								>
