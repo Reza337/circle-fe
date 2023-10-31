@@ -22,7 +22,31 @@ export default function Main({ children }: { children: ReactNode }) {
 				</Box>
 			</Box>
 
+			{/* <Grid templateColumns="20% 50% 30%" height={"100vh"}>
+				<GridItem as="aside" bg="gray.800" p="2rem"></GridItem>
+				<GridItem
+					as="main"
+					borderRight="1px"
+					bg="gray.800"
+					p="2rem"
+					borderBottom={"1px"}>
+					<Flex direction="column" color={"gray.100"}>
+						<Stack
+							flex="1"
+							overflow="auto"
+							py="5"
+							divider={
+								<StackDivider
+									w="95%"
+									alignSelf="center"
+									borderColor="gray.600"
+								/>
+							}> */}
 			{children}
+			{/* </Stack>
+					</Flex>
+				</GridItem>
+			</Grid> */}
 
 			<Box
 				display={"flex"}

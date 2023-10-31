@@ -9,8 +9,11 @@ import {
 	Text,
 } from "@chakra-ui/react";
 import { Footer, SuggestedFollow } from "..";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store/type/RootState";
 
 export default function Profile() {
+	const user = useSelector((state: RootState) => state.auth);
 	return (
 		<Box display="flex" flexDirection="column" gap={5}>
 			<Card bg="whiteAlpha.200" p={4} minW="400px">
@@ -28,7 +31,7 @@ export default function Profile() {
 						p={1}
 						bg="blackAlpha.800"
 						rounded="full">
-						<Avatar size="md" src="https://bit.ly/dan-abramov" />
+						<Avatar size="md" src={user.profile_picture} />
 					</Box>
 				</Box>
 				<Flex justify="right" mt={-6}>
@@ -46,13 +49,13 @@ export default function Profile() {
 
 				<Stack spacing={0}>
 					<Text mt={3} fontSize="lg" fontWeight="semibold" color="white">
-						😁 PrinzEugen
+						{user.full_name}
 					</Text>
 					<Text fontSize="xs" color="whiteAlpha.600">
-						@prinzeugen
+						@{user.username}
 					</Text>
 					<Text fontSize="sm" color="whiteAlpha.800">
-						GG GEMINK
+						{user.bio}
 					</Text>
 					<HStack fontSize="sm">
 						<HStack>

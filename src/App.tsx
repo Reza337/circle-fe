@@ -10,6 +10,7 @@ import Home from "./pages/Home";
 import Register from "./pages/Register";
 import Main from "./layout/Main";
 import Login from "./pages/Login";
+import DetailThread from "./pages/DetailThread";
 
 const theme = extendTheme({
 	styles: {
@@ -85,6 +86,15 @@ function App() {
 								element={
 									<Main>
 										<Home />
+									</Main>
+								}
+							/>
+
+							<Route
+								path="/detail/:id"
+								element={
+									<Main>
+										<DetailThread />
 									</Main>
 								}
 							/>

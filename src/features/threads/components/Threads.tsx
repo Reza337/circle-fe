@@ -9,14 +9,14 @@ import { Link } from "react-router-dom";
 import { BiMessageAltDetail } from "react-icons/bi";
 
 function Threads(props: threadsData) {
+	// const params = useParams();
 	return (
 		<>
 			<HStack>
 				<Box px="1rem">
 					<HStack>
 						<Avatar
-							// name={content}
-							src={props.user?.profile_picture}
+							src={props.users?.profile_picture}
 							size="sm"
 							mr="3"
 							_hover={{
@@ -30,7 +30,7 @@ function Threads(props: threadsData) {
 								_hover={{
 									cursor: "pointer",
 								}}>
-								{props.user?.full_name}
+								{props.users?.full_name}
 							</Text>
 						</Box>
 						<Box>
@@ -40,7 +40,7 @@ function Threads(props: threadsData) {
 									cursor: "pointer",
 								}}
 								color={"#616161"}>
-								@{props.user?.username}
+								@{props.users?.username}
 							</Text>
 						</Box>
 						<Text color="gray.600">&bull;</Text>
@@ -70,13 +70,13 @@ function Threads(props: threadsData) {
 								<HStack
 								// onClick={handleClick}
 								>
-									{props.likeToThread.length ? <BsHeartFill /> : <BsHeart />}
-									<Text>{props.likeToThread.length}</Text>
+									{props?.likes?.length ? <BsHeartFill /> : <BsHeart />}
+									<Text>{props?.likes?.length}</Text>
 								</HStack>
-								<Link to={`/`}>
+								<Link to={`/detail/${props.id}`}>
 									<HStack>
 										<BiMessageAltDetail />
-										<Text>{props.Reply.length} Replies</Text>
+										<Text>{props?.replies?.length} Replies</Text>
 									</HStack>
 								</Link>
 							</HStack>
@@ -84,51 +84,6 @@ function Threads(props: threadsData) {
 					</Box>
 				</Box>
 			</HStack>
-			{/* <div style={{ width: "100%", padding: "4" }}>
-				<Box display="flex" gap={3} marginY={"10px"}>
-					<Avatar
-						src={props.user?.profile_picture}
-						style={{
-							width: "50px",
-							height: "50px",
-							marginLeft: "10px",
-						}}
-					/>
-					<div>
-						<Box display="flex" gap={1}>
-							<p style={{ fontWeight: "bold", color: "white" }}>
-								{props.user?.full_name}
-							</p>
-							<p style={{ color: "#616161" }}>@{props.user?.username}</p>
-							<p
-								style={{
-									color: "#616161",
-									display: "flex",
-									alignItems: "center",
-								}}>
-								<PiDotOutlineFill />
-								{props.posted_at}
-							</p>
-						</Box>
-						<p
-							dangerouslySetInnerHTML={{ __html: props.content }}
-							style={{ color: "white" }}></p>
-						<Box w={"100%"} h={"auto"} py={5}>
-							<Image src={props.image} alt="Ini Gambar" w={"100%"} h={"auto"} />
-						</Box>
-						<Box
-							display={"flex"}
-							gap={4}
-							alignItems={"center"}
-							fontSize={"20px"}>
-							<AiOutlineHeart />
-							<p style={{ color: "#616161" }}>{props.likeToThread.length}</p>
-							<LiaCommentSolid />
-							<p style={{ color: "#616161" }}>{props.Reply.length} Replies</p>
-						</Box>
-					</div>
-				</Box>
-			</div> */}
 		</>
 	);
 }

@@ -1,19 +1,21 @@
+// import { Reply } from "./replyType";
+
 export type threadsData = {
-	id: number;
-	content: string;
-	image: string;
-	posted_at: string;
-	user: {
+	id?: number;
+	content?: string;
+	image?: string;
+	posted_at?: string;
+	users?: {
 		username: string;
 		full_name: string;
 		profile_picture: string;
 	};
-	likeToThread: [
+	likes?: [
 		{
 			id: number;
 		}
 	];
-	Reply: [
+	replies?: [
 		{
 			id: number;
 		}

@@ -1,12 +1,14 @@
 import { useThreads } from "@/features/threads/Hooks/useThreads";
+import { RootState } from "@/store/type/RootState";
 import { Avatar, Button, FormControl, HStack, Input } from "@chakra-ui/react";
 import { BiImageAdd } from "react-icons/bi";
+import { useSelector } from "react-redux";
 
 export default function FormThreads() {
 	const { mutate, handleChange, isPending } = useThreads();
+	const user = useSelector((state: RootState) => state.auth);
 
 	return (
-		// <Flex direction="column" color={"gray.100"}>
 		<form
 			onSubmit={(e) => {
 				e.preventDefault();
@@ -15,11 +17,7 @@ export default function FormThreads() {
 			encType="multipart/form-data">
 			<FormControl>
 				<HStack maxW={"6xl"} justifyContent={"center"} gap={5}>
-					<Avatar
-						size="sm"
-						name="Dan Abrahmov"
-						src="https://bit.ly/dan-abramov"
-					/>
+					<Avatar size="sm" name="Dan Abrahmov" src={user.profile_picture} />
 					<Input
 						variant="flushed"
 						placeholder="What's on your mind"

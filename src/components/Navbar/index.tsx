@@ -1,11 +1,5 @@
-// import { Box, Button, Text, Stack } from "@chakra-ui/react";
-// import { GoHomeFill } from "react-icons/go";
-// import { RiUserSearchLine } from "react-icons/ri";
-// import { AiOutlineHeart } from "react-icons/ai";
-// import { CgProfile } from "react-icons/cg";
-
 import { Box, Button, Heading, List, ListItem, Stack } from "@chakra-ui/react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import {
 	BiHeart,
 	BiHomeCircle,
@@ -13,8 +7,22 @@ import {
 	BiSearchAlt,
 	BiUserCircle,
 } from "react-icons/bi";
+import { AUTH_LOGOUT } from "@/store/rootReducer";
+import { useDispatch } from "react-redux";
+// import { useState } from "react";
 
 function Navbar() {
+	// const [setIsLoading] = useState<boolean>(true);
+	const navigate = useNavigate();
+	const dispatch = useDispatch();
+	async function handleLogout() {
+		try {
+			dispatch(AUTH_LOGOUT());
+			// setIsLoading(false);
+		} catch (err) {
+			console.log("Logout Gagal");
+		}
+	}
 	return (
 		<Box>
 			<Stack h="full" justifyContent="space-between">
@@ -63,12 +71,10 @@ function Navbar() {
 					variant="unstyled"
 					color="white"
 					fontSize={"2xl"}
-
-					// onClick={() => {
-					//   handleLogout();
-					//   navigate("/auth/login");
-					// }}
-				>
+					onClick={() => {
+						handleLogout();
+						navigate("/auth/login");
+					}}>
 					Logout
 				</Button>
 			</Box>
