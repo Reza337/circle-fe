@@ -10,8 +10,14 @@ import { threadsData } from "@/types/threadsType";
 import { getThreads } from "@/features/threads/Hooks/useThreads";
 import Threads from "@/features/threads/components/Threads";
 import FormThreads from "@/components/FormThreads";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store/type/RootState";
 
 export default function Home() {
+	const user = useSelector((state: RootState) => state.auth);
+	const userId = user?.id;
+	// console.log(userId);
+
 	const { threads } = getThreads();
 
 	return (
@@ -37,17 +43,22 @@ export default function Home() {
 							) : (
 								<>
 									{threads?.map((data: threadsData) => {
+										const isLiked = data.likes?.some(
+											(like) => like.users?.id === userId
+										);
 										return (
 											<Box key={data.id}>
 												<Threads
-													id={data.id}
+													id={data?.id}
 													content={data.content}
 													image={data.image}
 													posted_at={data.posted_at}
 													users={data.users}
 													likes={data.likes}
 													replies={data.replies}
+													isLiked={isLiked!}
 												/>
+												<hr />
 											</Box>
 										);
 									})}

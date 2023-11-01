@@ -58,6 +58,7 @@ export default function Main({ children }: { children: ReactNode }) {
 				paddingTop={"30px"}
 				paddingLeft={"15px"}
 				borderLeft={"1px solid gray"}
+				bg="gray.800"
 				h={"100vh"}>
 				<Box>
 					<Profile />

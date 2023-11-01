@@ -2,8 +2,10 @@ import { API } from "@/libs/api";
 import { ChangeEvent, useRef, useState } from "react";
 import { formThreads } from "@/types/formThreadsType";
 import { useMutation, useQueryClient, useQuery } from "@tanstack/react-query";
-import { Reply } from "@/types/replyType";
-import { useNavigate, useParams } from "react-router-dom";
+// import { useParams } from "react-router-dom";
+// import { Toast } from "@chakra-ui/react";
+// import { Reply } from "@/types/replyType";
+// import { useNavigate, useParams } from "react-router-dom";
 
 export const getThreads = () => {
 	const { data: threads } = useQuery({
@@ -47,7 +49,11 @@ export function useThreads() {
 		mutationFn: () => {
 			const formData = new FormData();
 			formData.append("content", form.content);
-			formData.append("image", form.image as File);
+			if (form.image == null || "") {
+				formData.append("image", "");
+			} else {
+				formData.append("image", form.image as File);
+			}
 			return API.post("/thread", formData);
 		},
 
@@ -87,59 +93,101 @@ export function useThreads() {
 	};
 }
 
-export const useDetailThreads = () => {
-	const params = useParams();
-	const navigate = useNavigate();
-	const [isLike, setIsLike] = useState<boolean>(false);
-	const { data: detailThreads, isLoading } = useQuery({
-		queryKey: ["detailThreads", params.id],
-		queryFn: async () => {
-			const { data } = await API.get(`/thread/${params.id}`);
+// Like Thread
+// Fungsi untuk melakukan "like" pada thread
+// const postLikeThread = async (threadId) => {
+// 	try {
+// 		const response = await API.post(`/thread/${threadId}/like`);
+// 		return response.data;
+// 	} catch (error) {
+// 		throw new Error(`Error while Like a Thread with error: ${error.message}`);
+// 	}
+// };
 
-			return data;
-		},
-	});
+// // Hook untuk menggunakan mutation "like" thread
+// export const usePostLike = () => {
+// 	const queryClient = useQueryClient();
 
-	const [keyword, setKeyword] = useState<Reply>({
-		content: "",
-		threads: Number(params.id),
-	});
+// 	const mutation = useMutation(postLikeThread, {
+// 		onSuccess: () => {
+// 			queryClient.invalidateQueries("threads"); // Invalidasi query "threads" untuk memperbarui data
+// 		},
+// 	});
 
-	const QueryClient = useQueryClient();
+// 	return mutation;
+// };
 
-	const mutation = useMutation({
-		mutationFn: (newreplies: Reply) => {
-			return API.post("/reply", newreplies);
-		},
-		onSuccess() {
-			QueryClient.invalidateQueries({ queryKey: ["detailThreads", params.id] });
-			setKeyword({
-				content: "",
-				threads: Number(params.id),
-				// likeId:
-			});
-		},
-	});
+// const {Id} = useParams()
+// const postLikeThread = (threadId: number) => {
+// 	return API.post(`/thread/${Id}/like`, "");
+// };
 
-	const handleChangeInputReplies = (e: React.ChangeEvent<HTMLInputElement>) => {
-		setKeyword({
-			...keyword,
-			[e.target.name]: e.target.value,
-		});
-	};
+// export const usePostLike = () => {
+// 	const QueryClient = useQueryClient();
 
-	const handleLikedPost = () => {
-		setIsLike(!isLike);
-	};
+// 	return useMutation({
+// 		mutationFn: postLikeThread,
+// 		onSuccess: () => {
+// 			QueryClient.invalidateQueries({
+// 				queryKey: ["threads"],
+// 			});
+// 		},
+// 	});
+// };
 
-	return {
-		keyword,
-		isLike,
-		navigate,
-		detailThreads,
-		mutation,
-		isLoading,
-		handleChangeInputReplies,
-		handleLikedPost,
-	};
-};
+// export const useDetailThreads = () => {
+// 	const params = useParams();
+// 	const navigate = useNavigate();
+// 	const [isLike, setIsLike] = useState<boolean>(false);
+// 	const { data: detailThreads, isLoading } = useQuery({
+// 		queryKey: ["detailThreads", params.id],
+// 		queryFn: async () => {
+// 			const { data } = await API.get(`/thread/${params.id}`);
+
+// 			return data;
+// 		},
+// 	});
+
+// 	const [keyword, setKeyword] = useState<Reply>({
+// 		content: "",
+// 		threads: Number(params.id),
+// 	});
+
+// 	const QueryClient = useQueryClient();
+
+// const mutation = useMutation({
+// 	mutationFn: (newreplies: Reply) => {
+// 		return API.post("/reply", newreplies);
+// 	},
+// 	onSuccess() {
+// 		QueryClient.invalidateQueries({ queryKey: ["detailThreads", params.id] });
+// 		setKeyword({
+// 			content: "",
+// 			threads: Number(params.id),
+// 			// likeId:
+// 		});
+// 	},
+// });
+
+// 	const handleChangeInputReplies = (e: React.ChangeEvent<HTMLInputElement>) => {
+// 		setKeyword({
+// 			...keyword,
+// 			[e.target.name]: e.target.value,
+// 		});
+// 	};
+
+// 	const handleLikedPost = () => {
+// 		setIsLike(!isLike);
+// 	};
+
+// 	return {
+// 		keyword,
+// 		isLike,
+// 		navigate,
+// 		detailThreads,
+// 		mutation,
+// 		isLoading,
+// 		handleChangeInputReplies,
+// 		handleLikedPost,
+// 	};
+// };

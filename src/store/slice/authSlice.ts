@@ -24,18 +24,19 @@ export const authSlice = createSlice({
 			localStorage.setItem("token", payload.token);
 
 			const user: IUser = {
-				id: payload.id,
-				full_name: payload.full_name,
-				username: payload.username,
-				email: payload.email,
-				profile_picture: payload.profile_picture,
-				bio: payload.bio,
+				id: payload.user.id,
+				full_name: payload.user.full_name,
+				username: payload.user.username,
+				email: payload.user.email,
+				profile_picture: payload.user.profile_picture,
+				bio: payload.user.bio,
 			};
 
 			return user;
 		},
 		AUTH_CHECK: (_, action) => {
 			const payload = action.payload;
+			// console.log(payload);
 
 			const user: IUser = {
 				id: payload.id,

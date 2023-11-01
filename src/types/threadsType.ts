@@ -1,7 +1,11 @@
 // import { Reply } from "./replyType";
 
+import { ThreadLikeType } from "./likeType";
+
+// import { ThreadLikeType } from "./likeType";
+
 export type threadsData = {
-	id?: number;
+	id?: number | undefined | null;
 	content?: string;
 	image?: string;
 	posted_at?: string;
@@ -10,14 +14,11 @@ export type threadsData = {
 		full_name: string;
 		profile_picture: string;
 	};
-	likes?: [
-		{
-			id: number;
-		}
-	];
+	likes?: ThreadLikeType[];
 	replies?: [
 		{
 			id: number;
 		}
 	];
+	isLiked: boolean;
 };

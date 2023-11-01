@@ -2,7 +2,6 @@ import {
 	Box,
 	Input,
 	FormControl,
-	Image,
 	Text,
 	Button,
 	Grid,
@@ -10,6 +9,10 @@ import {
 	Flex,
 	Stack,
 	StackDivider,
+	Avatar,
+	HStack,
+	chakra,
+	Image,
 } from "@chakra-ui/react";
 // import { ThreadCard } from "@/features/threads";
 import { useState, useEffect, ChangeEvent } from "react";
@@ -17,32 +20,63 @@ import { API } from "@/libs/api";
 import { useParams } from "react-router-dom";
 // import { IThreadCard } from "@/types/Thread";
 // import { ReplyPost } from "@/types/Reply";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { ReplyPost } from "@/types/replyType";
 import { threadsData } from "@/types/threadsType";
-import Threads from "@/features/threads/components/Threads";
+// import Threads from "@/features/threads/components/Threads";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store/type/RootState";
+import { BsHeart, BsHeartFill } from "react-icons/bs";
+import { BiMessageAltDetail } from "react-icons/bi";
 
 export default function DetailThread() {
 	const { id } = useParams();
-	const [data, setData] = useState<threadsData>();
+	// const [data, setData] = useState<threadsData>();
 	const [reply, setReply] = useState<ReplyPost>({
 		content: "",
 		thread_id: parseInt(id as string),
 	});
 
-	useEffect(() => {
-		getOneThread();
-	}, []);
+	// useEffect(() => {
+	// 	getOneThread();
+	// }, []);
 
-	async function getOneThread() {
-		try {
-			const response = await API.get(`/thread/${id}`);
+	// async function getOneThread() {
+	// try {
+	// const response = await API.get(`/thread/${id}`);
+	// console.log(response);
+	const { data: detailThreads } = useQuery({
+		queryKey: ["detailThreads", id],
+		queryFn: async () => {
+			const { data } = await API.get(`/thread/${id}`);
+			return data;
+		},
+		refetchInterval: 1000,
+	});
+	console.log(detailThreads);
 
-			setData(response.data);
-		} catch (err) {
-			console.log(err);
-		}
-	}
+	// setData(response.data);
+	// } catch (err) {
+	// 	console.log(err);
+	// }
+	// }
+
+	// For Like
+	const user = useSelector((state: RootState) => state.auth);
+	const userId = user?.id;
+	// console.log(userId);
+	const isLiked = detailThreads?.likes?.some(
+		(like) => like?.users?.id === userId
+	);
+
+	const threadId = detailThreads?.id;
+	// console.log(threadId);
+
+	const mutation = useMutation({
+		mutationFn: (like) => {
+			return API.post(`/thread/${threadId}/like`, like);
+		},
+	});
 
 	function handleChange(event: ChangeEvent<HTMLInputElement>) {
 		setReply({
@@ -68,8 +102,6 @@ export default function DetailThread() {
 			await API.get(`/reply?thread_id=${id}`).then((res) => res.data),
 	});
 
-	console.log(data);
-
 	return (
 		<Box>
 			<Grid templateColumns="20% 50% 30%" height={"100vh"}>
@@ -88,15 +120,86 @@ export default function DetailThread() {
 									borderColor="gray.600"
 								/>
 							}>
-							<Threads
-								id={data?.id}
-								content={data?.content}
-								image={data?.image}
-								posted_at={data?.posted_at}
-								users={data?.users}
-								likes={data?.likes}
-								replies={data?.replies}
-							/>
+							<Box>
+								<HStack>
+									<Box px="1rem">
+										<HStack>
+											<Avatar
+												src={detailThreads?.users?.profile_picture}
+												size="sm"
+												mr="3"
+												_hover={{
+													cursor: "pointer",
+												}}
+											/>
+
+											<Box>
+												<Text
+													fontWeight="medium"
+													_hover={{
+														cursor: "pointer",
+													}}>
+													{detailThreads?.users?.full_name}
+												</Text>
+											</Box>
+											<Box>
+												<Text
+													fontWeight="medium"
+													_hover={{
+														cursor: "pointer",
+													}}
+													color={"#616161"}>
+													@{detailThreads?.users?.username}
+												</Text>
+											</Box>
+											<Text color="gray.600">&bull;</Text>
+											<Box>
+												<chakra.time fontSize="2xs" color="gray.400">
+													{detailThreads?.posted_at}
+												</chakra.time>
+											</Box>
+										</HStack>
+										<Box ms="3rem">
+											<Box my="2">
+												<Text fontSize="0.86rem">{detailThreads?.content}</Text>
+											</Box>
+											{detailThreads?.image && (
+												<Box mt="0.5rem">
+													<Image
+														boxSize="300px"
+														objectFit="cover"
+														src={detailThreads?.image}
+														alt="Dan Abramov"
+														rounded="md"
+													/>
+												</Box>
+											)}
+											<Box>
+												<HStack fontSize="15px">
+													<HStack
+														onClick={() => mutation.mutate()}
+														cursor={"pointer"}>
+														{isLiked ? (
+															<BsHeartFill color="red" />
+														) : (
+															<BsHeart />
+														)}
+														<Text>{detailThreads?.likes?.length}</Text>
+													</HStack>
+													{/* <Link> */}
+													<HStack>
+														<BiMessageAltDetail />
+														<Text>
+															{detailThreads?.replies?.length} Replies
+														</Text>
+													</HStack>
+													{/* </Link> */}
+												</HStack>
+											</Box>
+										</Box>
+									</Box>
+								</HStack>
+							</Box>
 							<Box marginTop={"20px"}>
 								<form onSubmit={handlePost} encType="multipart/form-data">
 									<FormControl
@@ -137,11 +240,11 @@ export default function DetailThread() {
 										padding={"20px 0px"}
 										bg={"transparent"}
 										color={"white"}>
-										<Image
+										<Avatar
 											src={
-												data.users?.picture
-													? data.users?.picture
-													: "https://i.pinimg.com/564x/bc/c6/e1/bcc6e12a3bef4190e0f8f1a14885c321.jpg"
+												data.users?.profile_picture
+													? data.users?.profile_picture
+													: null
 											}
 											width={"50px"}
 											height={"50px"}

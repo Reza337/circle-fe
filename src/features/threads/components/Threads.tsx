@@ -7,16 +7,37 @@ import { Box, Avatar, Image, HStack, Text, chakra } from "@chakra-ui/react";
 import { BsHeart, BsHeartFill } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import { BiMessageAltDetail } from "react-icons/bi";
+import { useMutation } from "@tanstack/react-query";
+import { API } from "@/libs/api";
+// import { usePostLike } from "../Hooks/useThreads";
 
 function Threads(props: threadsData) {
+	// const { mutate } = usePostLike();
 	// const params = useParams();
+	// console.log(props.isLiked);
+	// console.log(props);
+
+	// Likes
+	const threadId = props.id;
+	// console.log(threadId);
+
+	const mutation = useMutation({
+		mutationFn: (like) => {
+			return API.post(`/thread/${threadId}/like`, like);
+		},
+	});
+
 	return (
 		<>
 			<HStack>
-				<Box px="1rem">
+				<Box px="1rem" marginTop="10px">
 					<HStack>
 						<Avatar
-							src={props.users?.profile_picture}
+							src={
+								props.users?.profile_picture
+									? props.users?.profile_picture
+									: "https://img.freepik.com/premium-photo/3d-rendering-male-character-profile-avatar-happy-young-man-with-bucket-hat-blue-clothes-good_477250-60.jpg?w=740"
+							}
 							size="sm"
 							mr="3"
 							_hover={{
@@ -51,6 +72,9 @@ function Threads(props: threadsData) {
 						</Box>
 					</HStack>
 					<Box ms="3rem">
+						<Box my="2">
+							<Text fontSize="0.86rem">{props.content}</Text>
+						</Box>
 						{props.image && (
 							<Box mt="0.5rem">
 								<Image
@@ -62,15 +86,10 @@ function Threads(props: threadsData) {
 								/>
 							</Box>
 						)}
-						<Box my="2">
-							<Text fontSize="0.86rem">{props.content}</Text>
-						</Box>
 						<Box>
-							<HStack fontSize="15px">
-								<HStack
-								// onClick={handleClick}
-								>
-									{props?.likes?.length ? <BsHeartFill /> : <BsHeart />}
+							<HStack fontSize="15px" marginY={"10px"}>
+								<HStack onClick={() => mutation.mutate()} cursor={"pointer"}>
+									{props.isLiked ? <BsHeartFill color="red" /> : <BsHeart />}
 									<Text>{props?.likes?.length}</Text>
 								</HStack>
 								<Link to={`/detail/${props.id}`}>
