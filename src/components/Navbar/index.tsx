@@ -42,7 +42,7 @@ function Navbar() {
 						<Box display={"flex"} alignItems="center">
 							<BiSearchAlt />
 							<ListItem ms={3}>
-								<NavLink to="/">Search.</NavLink>
+								<NavLink to="/search">Search.</NavLink>
 							</ListItem>
 						</Box>
 						<Box display={"flex"} alignItems="center">

@@ -72,7 +72,7 @@ function Threads(props: threadsData) {
 						</Box>
 					</HStack>
 					<Box ms="3rem">
-						<Box my="2">
+						<Box my="5" ml={"5px"}>
 							<Text fontSize="0.86rem">{props.content}</Text>
 						</Box>
 						{props.image && (
@@ -89,12 +89,16 @@ function Threads(props: threadsData) {
 						<Box>
 							<HStack fontSize="15px" marginY={"10px"}>
 								<HStack onClick={() => mutation.mutate()} cursor={"pointer"}>
-									{props.isLiked ? <BsHeartFill color="red" /> : <BsHeart />}
+									<Box fontSize={"18px"}>
+										{props.isLiked ? <BsHeartFill color="red" /> : <BsHeart />}
+									</Box>
 									<Text>{props?.likes?.length}</Text>
 								</HStack>
 								<Link to={`/detail/${props.id}`}>
 									<HStack>
-										<BiMessageAltDetail />
+										<Box fontSize={"20px"}>
+											<BiMessageAltDetail />
+										</Box>
 										<Text>{props?.replies?.length} Replies</Text>
 									</HStack>
 								</Link>

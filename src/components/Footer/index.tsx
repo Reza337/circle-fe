@@ -27,7 +27,7 @@ export function Footer() {
 				<Text fontSize={"sm"}>
 					Developed by{" "}
 					<Text as="span" fontWeight={600}>
-						Najmuddin Habib
+						Muhammad Reza Fadilah
 					</Text>
 				</Text>
 				<Box as={Flex} gap={1}>

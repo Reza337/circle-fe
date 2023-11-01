@@ -1,7 +1,7 @@
 import { Footer, SuggestedFollow } from "@/components";
 import Profile from "@/components/Myprofile";
 import Navbar from "@/components/Navbar";
-import { Box } from "@chakra-ui/react";
+import { Box, Grid, GridItem } from "@chakra-ui/react";
 import { ReactNode } from "react";
 
 export default function Main({ children }: { children: ReactNode }) {
@@ -14,6 +14,7 @@ export default function Main({ children }: { children: ReactNode }) {
 				position={"fixed"}
 				left={"30px"}
 				paddingTop={"30px"}
+				bg="gray.800"
 				paddingRight={"10px"}
 				borderRight={"1px solid gray"}
 				h={"100vh"}>
@@ -22,31 +23,14 @@ export default function Main({ children }: { children: ReactNode }) {
 				</Box>
 			</Box>
 
-			{/* <Grid templateColumns="20% 50% 30%" height={"100vh"}>
-				<GridItem as="aside" bg="gray.800" p="2rem"></GridItem>
-				<GridItem
-					as="main"
-					borderRight="1px"
-					bg="gray.800"
-					p="2rem"
-					borderBottom={"1px"}>
-					<Flex direction="column" color={"gray.100"}>
-						<Stack
-							flex="1"
-							overflow="auto"
-							py="5"
-							divider={
-								<StackDivider
-									w="95%"
-									alignSelf="center"
-									borderColor="gray.600"
-								/>
-							}> */}
-			{children}
-			{/* </Stack>
-					</Flex>
-				</GridItem>
-			</Grid> */}
+			<Box>
+				<Grid templateColumns="20% 50% 30%" height={"100vh"}>
+					<GridItem as="aside" bg="gray.800" p="2rem"></GridItem>
+					<GridItem as="main" borderRight="1px" bg="gray.800" p="2rem">
+						{children}
+					</GridItem>
+				</Grid>
+			</Box>
 
 			<Box
 				display={"flex"}

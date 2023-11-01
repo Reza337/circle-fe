@@ -11,6 +11,7 @@ import Register from "./pages/Register";
 import Main from "./layout/Main";
 import Login from "./pages/Login";
 import DetailThread from "./pages/DetailThread";
+import Search from "./pages/Search";
 
 const theme = extendTheme({
 	styles: {
@@ -95,6 +96,15 @@ function App() {
 								element={
 									<Main>
 										<DetailThread />
+									</Main>
+								}
+							/>
+
+							<Route
+								path="/search"
+								element={
+									<Main>
+										<Search />
 									</Main>
 								}
 							/>
