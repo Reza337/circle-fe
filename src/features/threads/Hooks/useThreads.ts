@@ -49,11 +49,8 @@ export function useThreads() {
 		mutationFn: () => {
 			const formData = new FormData();
 			formData.append("content", form.content);
-			if (form.image == null || "") {
-				formData.append("image", "");
-			} else {
-				formData.append("image", form.image as File);
-			}
+			formData.append("image", (form.image as File) || null);
+			// console.log(formData);
 			return API.post("/thread", formData);
 		},
 

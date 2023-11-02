@@ -48,7 +48,7 @@ function Navbar() {
 						<Box display={"flex"} alignItems="center">
 							<BiHeart />
 							<ListItem ms={3}>
-								<NavLink to="/">Follows.</NavLink>
+								<NavLink to="/follows">Follows.</NavLink>
 							</ListItem>
 						</Box>
 						<Box display={"flex"} alignItems="center">

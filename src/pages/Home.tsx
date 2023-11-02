@@ -21,7 +21,7 @@ export default function Home() {
 	const { threads } = getThreads();
 
 	return (
-		<Box>
+		<Box className="scroll">
 			{/* // 	<Grid templateColumns="20% 50% 30%" height={"100vh"}>
 		// 		<GridItem as="aside" bg="gray.800" p="2rem"></GridItem>
 		// 		<GridItem as="main" borderRight="1px" bg="gray.800" p="2rem"> */}

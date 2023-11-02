@@ -23,20 +23,22 @@ export default function Main({ children }: { children: ReactNode }) {
 				</Box>
 			</Box>
 
-			<Box>
+			<Box >
 				<Grid templateColumns="20% 50% 30%" height={"100vh"}>
 					<GridItem as="aside" bg="gray.800" p="2rem"></GridItem>
-					<GridItem as="main" borderRight="1px" bg="gray.800" p="2rem">
+					<GridItem as="main" borderRight="1px" bg="gray.800" p="2rem" className="scroll">
 						{children}
 					</GridItem>
 				</Grid>
 			</Box>
 
 			<Box
+				className="scroll"
 				display={"flex"}
 				flexDirection={"column"}
 				gap={5}
 				position={"fixed"}
+				overflow={"auto"}
 				right={"5px"}
 				top={"0px"}
 				paddingTop={"30px"}

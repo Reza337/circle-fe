@@ -6,6 +6,7 @@ import { Provider } from "react-redux";
 import { configureStore } from "@reduxjs/toolkit";
 import RootReducer from "@/store/rootReducer.ts";
 import { BrowserRouter as Router } from "react-router-dom";
+import "./index.css";
 
 const client = new QueryClient();
 

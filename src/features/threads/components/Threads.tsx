@@ -29,8 +29,8 @@ function Threads(props: threadsData) {
 
 	return (
 		<>
-			<HStack>
-				<Box px="1rem" marginTop="10px">
+			<HStack className="scroll">
+				<Box px="1rem" marginTop="10px" className="scroll">
 					<HStack>
 						<Avatar
 							src={

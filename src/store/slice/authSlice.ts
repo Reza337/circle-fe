@@ -11,6 +11,8 @@ const initiaslState: IUser = {
 	email: "",
 	profile_picture: "",
 	bio: "",
+	followers: [],
+	followings: [],
 };
 
 export const authSlice = createSlice({
@@ -30,6 +32,8 @@ export const authSlice = createSlice({
 				email: payload.user.email,
 				profile_picture: payload.user.profile_picture,
 				bio: payload.user.bio,
+				followers: payload.user.followers,
+				followings: payload.user.followings,
 			};
 
 			return user;
@@ -45,6 +49,8 @@ export const authSlice = createSlice({
 				email: payload.email,
 				profile_picture: payload.profile_picture,
 				bio: payload.bio,
+				followers: payload.followers,
+				followings: payload.followings,
 			};
 
 			return user;

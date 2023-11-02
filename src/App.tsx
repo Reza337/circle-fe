@@ -1,6 +1,4 @@
-import { RootState } from "./store/type/RootState";
 import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
 import { API, setAuthToken } from "./libs/api";
 import { useEffect, useState } from "react";
 import { AUTH_CHECK, AUTH_ERROR } from "./store/rootReducer";
@@ -12,6 +10,8 @@ import Main from "./layout/Main";
 import Login from "./pages/Login";
 import DetailThread from "./pages/DetailThread";
 import Search from "./pages/Search";
+import Follows from "./pages/Follows";
+// import Spinner from "./components/Spinner";
 
 const theme = extendTheme({
 	styles: {
@@ -28,8 +28,8 @@ const theme = extendTheme({
 
 // setAuthToken => apakah sudah token ? akses : login/register
 function App() {
-	const auth = useSelector((state: RootState) => state.auth);
-	console.log(auth);
+	// const auth = useSelector((state: RootState) => state.auth);
+	// console.log(auth);
 
 	const [isLoading, setIsLoading] = useState<boolean>(true);
 	const dispatch = useDispatch();
@@ -39,10 +39,12 @@ function App() {
 	async function authCheck() {
 		try {
 			setAuthToken(localStorage.token);
-			const response = await API.get("/auth/check");
-			console.log("check auth app", response);
+			// console.log(localStorage);
 
-			dispatch(AUTH_CHECK(response.data.user));
+			const response = await API.get("/user/auth");
+			console.log("check auth app", response.data.data);
+
+			dispatch(AUTH_CHECK(response.data.data));
 			setIsLoading(false);
 		} catch (err) {
 			dispatch(AUTH_ERROR());
@@ -51,6 +53,7 @@ function App() {
 			navigate("/auth/login");
 		}
 	}
+	// if (isLoading) return <Spinner />;
 
 	useEffect(() => {
 		if (localStorage.token) {
@@ -105,6 +108,15 @@ function App() {
 								element={
 									<Main>
 										<Search />
+									</Main>
+								}
+							/>
+
+							<Route
+								path="/follows"
+								element={
+									<Main>
+										<Follows />
 									</Main>
 								}
 							/>

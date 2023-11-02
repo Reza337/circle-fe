@@ -15,14 +15,13 @@ import {
 	Image,
 } from "@chakra-ui/react";
 // import { ThreadCard } from "@/features/threads";
-import { useState, useEffect, ChangeEvent } from "react";
+import { useState, ChangeEvent } from "react";
 import { API } from "@/libs/api";
 import { useParams } from "react-router-dom";
 // import { IThreadCard } from "@/types/Thread";
 // import { ReplyPost } from "@/types/Reply";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { ReplyPost } from "@/types/replyType";
-import { threadsData } from "@/types/threadsType";
 // import Threads from "@/features/threads/components/Threads";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/type/RootState";
@@ -37,14 +36,6 @@ export default function DetailThread() {
 		thread_id: parseInt(id as string),
 	});
 
-	// useEffect(() => {
-	// 	getOneThread();
-	// }, []);
-
-	// async function getOneThread() {
-	// try {
-	// const response = await API.get(`/thread/${id}`);
-	// console.log(response);
 	const { data: detailThreads } = useQuery({
 		queryKey: ["detailThreads", id],
 		queryFn: async () => {
@@ -53,13 +44,7 @@ export default function DetailThread() {
 		},
 		refetchInterval: 1000,
 	});
-	console.log(detailThreads);
-
-	// setData(response.data);
-	// } catch (err) {
-	// 	console.log(err);
-	// }
-	// }
+	// console.log(detailThreads);
 
 	// For Like
 	const user = useSelector((state: RootState) => state.auth);
