@@ -7,7 +7,7 @@ import { useMutation, useQueryClient, useQuery } from "@tanstack/react-query";
 // import { Reply } from "@/types/replyType";
 // import { useNavigate, useParams } from "react-router-dom";
 
-export const getThreads = () => {
+export const useThread = () => {
 	const { data: threads } = useQuery({
 		queryKey: ["threads"],
 

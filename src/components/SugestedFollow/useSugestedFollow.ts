@@ -6,7 +6,7 @@ export function useUserSuggest() {
 		queryKey: ["userSuggestData"],
 		queryFn: async () => {
 			const { data } = await API.get("/users");
-			// console.log(data.data);
+			console.log(data.data);
 
 			return data.data;
 		},

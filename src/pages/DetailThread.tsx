@@ -89,173 +89,156 @@ export default function DetailThread() {
 
 	return (
 		<Box>
-			<Grid templateColumns="20% 50% 30%" height={"100vh"}>
-				<GridItem as="aside" bg="gray.800" p="2rem"></GridItem>
-				<GridItem as="main" borderRight="1px" bg="gray.800" p="2rem">
-					<Flex direction="column" color={"gray.100"}>
-						{/* <FormThreads /> */}
-						<Stack
-							flex="1"
-							overflow="auto"
-							py="5"
-							divider={
-								<StackDivider
-									w="95%"
-									alignSelf="center"
-									borderColor="gray.600"
-								/>
-							}>
-							<Box>
+			<Flex direction="column" color={"gray.100"}>
+				{/* <FormThreads /> */}
+				<Stack
+					flex="1"
+					overflow="auto"
+					py="5"
+					divider={
+						<StackDivider w="95%" alignSelf="center" borderColor="gray.600" />
+					}>
+					<Box>
+						<HStack>
+							<Box px="1rem">
 								<HStack>
-									<Box px="1rem">
-										<HStack>
-											<Avatar
-												src={detailThreads?.users?.profile_picture}
-												size="sm"
-												mr="3"
-												_hover={{
-													cursor: "pointer",
-												}}
-											/>
+									<Avatar
+										src={detailThreads?.users?.profile_picture}
+										size="sm"
+										mr="3"
+										_hover={{
+											cursor: "pointer",
+										}}
+									/>
 
-											<Box>
-												<Text
-													fontWeight="medium"
-													_hover={{
-														cursor: "pointer",
-													}}>
-													{detailThreads?.users?.full_name}
-												</Text>
-											</Box>
-											<Box>
-												<Text
-													fontWeight="medium"
-													_hover={{
-														cursor: "pointer",
-													}}
-													color={"#616161"}>
-													@{detailThreads?.users?.username}
-												</Text>
-											</Box>
-											<Text color="gray.600">&bull;</Text>
-											<Box>
-												<chakra.time fontSize="2xs" color="gray.400">
-													{detailThreads?.posted_at}
-												</chakra.time>
-											</Box>
-										</HStack>
-										<Box ms="3rem">
-											<Box my="2">
-												<Text fontSize="0.86rem">{detailThreads?.content}</Text>
-											</Box>
-											{detailThreads?.image && (
-												<Box mt="0.5rem">
-													<Image
-														boxSize="300px"
-														objectFit="cover"
-														src={detailThreads?.image}
-														alt="Dan Abramov"
-														rounded="md"
-													/>
-												</Box>
-											)}
-											<Box>
-												<HStack fontSize="15px">
-													<HStack
-														onClick={() => mutation.mutate()}
-														cursor={"pointer"}>
-														{isLiked ? (
-															<BsHeartFill color="red" />
-														) : (
-															<BsHeart />
-														)}
-														<Text>{detailThreads?.likes?.length}</Text>
-													</HStack>
-													{/* <Link> */}
-													<HStack>
-														<BiMessageAltDetail />
-														<Text>
-															{detailThreads?.replies?.length} Replies
-														</Text>
-													</HStack>
-													{/* </Link> */}
-												</HStack>
-											</Box>
-										</Box>
+									<Box>
+										<Text
+											fontWeight="medium"
+											_hover={{
+												cursor: "pointer",
+											}}>
+											{detailThreads?.users?.full_name}
+										</Text>
+									</Box>
+									<Box>
+										<Text
+											fontWeight="medium"
+											_hover={{
+												cursor: "pointer",
+											}}
+											color={"#616161"}>
+											@{detailThreads?.users?.username}
+										</Text>
+									</Box>
+									<Text color="gray.600">&bull;</Text>
+									<Box>
+										<chakra.time fontSize="2xs" color="gray.400">
+											{detailThreads?.posted_at}
+										</chakra.time>
 									</Box>
 								</HStack>
-							</Box>
-							<Box marginTop={"20px"}>
-								<form onSubmit={handlePost} encType="multipart/form-data">
-									<FormControl
-										display={"flex"}
-										flexDirection={"column"}
-										gap={2}
-										color={"white"}>
-										<Box
-											display={"flex"}
-											justifyContent={"center"}
-											alignItems={"center"}
-											gap={2}>
-											<Input
-												placeholder="What is happening?!"
-												name="content"
-												onChange={handleChange}
-											/>
-											<Button
-												type="submit"
-												backgroundColor={"brand.green"}
-												color={"white"}
-												colorScheme="green"
-												// value={"Post"}
-												fontSize={"12px"}
-												width={"70px"}>
-												Post
-											</Button>
-										</Box>
-									</FormControl>
-								</form>
-
-								{getReply?.map((data: any, index: any) => (
-									<Box
-										key={index}
-										display={"flex"}
-										width="500px"
-										borderBottom={"1px solid white"}
-										padding={"20px 0px"}
-										bg={"transparent"}
-										color={"white"}>
-										<Avatar
-											src={
-												data.users?.profile_picture
-													? data.users?.profile_picture
-													: null
-											}
-											width={"50px"}
-											height={"50px"}
-											objectFit={"cover"}
-											borderRadius={"50%"}
-											marginRight={"20px"}
-										/>
-
-										<Box>
-											<Box display={"flex"}>
-												<Text color={"grey"}>{data.users?.full_name}</Text>
-												<Text ms={2} color="grey">
-													@{data.users?.username}
-												</Text>
-											</Box>
-											<Text>{data.content}</Text>
-										</Box>
+								<Box ms="3rem">
+									<Box my="2">
+										<Text fontSize="0.86rem">{detailThreads?.content}</Text>
 									</Box>
-								))}
+									{detailThreads?.image && (
+										<Box mt="0.5rem">
+											<Image
+												boxSize="300px"
+												objectFit="cover"
+												src={detailThreads?.image}
+												alt="Dan Abramov"
+												rounded="md"
+											/>
+										</Box>
+									)}
+									<Box>
+										<HStack fontSize="15px">
+											<HStack
+												onClick={() => mutation.mutate()}
+												cursor={"pointer"}>
+												{isLiked ? <BsHeartFill color="red" /> : <BsHeart />}
+												<Text>{detailThreads?.likes?.length}</Text>
+											</HStack>
+											{/* <Link> */}
+											<HStack>
+												<BiMessageAltDetail />
+												<Text>{detailThreads?.replies?.length} Replies</Text>
+											</HStack>
+											{/* </Link> */}
+										</HStack>
+									</Box>
+								</Box>
 							</Box>
-							{/* </Box>
-		</Box> */}
-						</Stack>
-					</Flex>
-				</GridItem>
-			</Grid>
+						</HStack>
+					</Box>
+					<Box marginTop={"20px"}>
+						<form onSubmit={handlePost} encType="multipart/form-data">
+							<FormControl
+								display={"flex"}
+								flexDirection={"column"}
+								gap={2}
+								color={"white"}>
+								<Box
+									display={"flex"}
+									justifyContent={"center"}
+									alignItems={"center"}
+									gap={2}>
+									<Input
+										placeholder="What is happening?!"
+										name="content"
+										onChange={handleChange}
+									/>
+									<Button
+										type="submit"
+										backgroundColor={"brand.green"}
+										color={"white"}
+										colorScheme="green"
+										// value={"Post"}
+										fontSize={"12px"}
+										width={"70px"}>
+										Post
+									</Button>
+								</Box>
+							</FormControl>
+						</form>
+
+						{getReply?.map((data: any, index: any) => (
+							<Box
+								key={index}
+								display={"flex"}
+								width="500px"
+								borderBottom={"1px solid white"}
+								padding={"20px 0px"}
+								bg={"transparent"}
+								color={"white"}>
+								<Avatar
+									src={
+										data.users?.profile_picture
+											? data.users?.profile_picture
+											: null
+									}
+									width={"50px"}
+									height={"50px"}
+									objectFit={"cover"}
+									borderRadius={"50%"}
+									marginRight={"20px"}
+								/>
+
+								<Box>
+									<Box display={"flex"}>
+										<Text color={"grey"}>{data.users?.full_name}</Text>
+										<Text ms={2} color="grey">
+											@{data.users?.username}
+										</Text>
+									</Box>
+									<Text>{data.content}</Text>
+								</Box>
+							</Box>
+						))}
+					</Box>
+				</Stack>
+			</Flex>
 		</Box>
 	);
 }

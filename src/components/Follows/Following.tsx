@@ -12,14 +12,14 @@ import {
 	Text,
 } from "@chakra-ui/react";
 import Spinner from "../../components/Spinner";
-import { useFollowData } from "./useFollowing";
+import { useFollowingData } from "./useFollowing";
 
 export default function Following() {
-	const { userFollowData, isLoading } = useFollowData();
+	const { userFollowingData, isLoading } = useFollowingData();
 
 	if (isLoading) return <Spinner />;
 
-	const following = userFollowData.followings;
+	const following = userFollowingData;
 
 	return (
 		<Box>
@@ -48,11 +48,7 @@ export default function Following() {
 											</Text>
 										</Box>
 									</Flex>
-									<Flex alignItems={"center"}>
-										<Button borderRadius={"full"} h={"32px"}>
-											Unfollow
-										</Button>
-									</Flex>
+									<Flex alignItems={"center"}></Flex>
 								</Flex>
 							</Box>
 						))}

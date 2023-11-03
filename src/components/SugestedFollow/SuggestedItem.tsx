@@ -6,11 +6,9 @@ import { useSelector } from "react-redux";
 
 function SuggestedItem(props: any) {
 	const user = useSelector((state: RootState) => state.auth);
-	const userId = user.id;
-	// console.log(props.item.followers);
 
 	const isFollow = props.item.followers.some((follow: any) => {
-		return follow.id === userId;
+		return follow.id === user.id;
 	});
 	// console.log(isFollow);
 
@@ -20,38 +18,42 @@ function SuggestedItem(props: any) {
 		},
 	});
 	return (
-		<Flex gap="4" my={"10px"}>
-			<Flex flex="1" gap="4" alignItems="center" flexWrap="wrap">
-				<Avatar src={props.item.profile_picture} size="sm" />
-				<Box>
-					<Heading size="sm" color={"white"}>
-						{props.item.full_name}
-					</Heading>
-					<Text fontSize={"sm"} color={"whiteAlpha.500"}>
-						@{props.item.username}
-					</Text>
-				</Box>
-			</Flex>
-			<Flex alignItems={"center"}>
-				{isFollow ? (
-					<Button
-						borderRadius={"full"}
-						h={"28px"}
-						fontSize={"14px"}
-						onClick={() => mutation.mutate()}>
-						Unfollow
-					</Button>
-				) : (
-					<Button
-						borderRadius={"full"}
-						h={"28px"}
-						fontSize={"14px"}
-						onClick={() => mutation.mutate()}>
-						Follow
-					</Button>
-				)}
-			</Flex>
-		</Flex>
+		<>
+			{props.item.id !== user.id && (
+				<Flex gap="4" my={"10px"}>
+					<Flex flex="1" gap="4" alignItems="center" flexWrap="wrap">
+						<Avatar src={props.item.profile_picture} size="sm" />
+						<Box>
+							<Heading size="sm" color={"white"}>
+								{props.item.full_name}
+							</Heading>
+							<Text fontSize={"sm"} color={"whiteAlpha.500"}>
+								@{props.item.username}
+							</Text>
+						</Box>
+					</Flex>
+					<Flex alignItems={"center"}>
+						{isFollow ? (
+							<Button
+								borderRadius={"full"}
+								h={"28px"}
+								fontSize={"14px"}
+								onClick={() => mutation.mutate()}>
+								Unfollow
+							</Button>
+						) : (
+							<Button
+								borderRadius={"full"}
+								h={"28px"}
+								fontSize={"14px"}
+								onClick={() => mutation.mutate()}>
+								Follow
+							</Button>
+						)}
+					</Flex>
+				</Flex>
+			)}
+		</>
 	);
 }
 

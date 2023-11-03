@@ -7,7 +7,7 @@ import {
 	StackDivider,
 } from "@chakra-ui/react";
 import { threadsData } from "@/types/threadsType";
-import { getThreads } from "@/features/threads/Hooks/useThreads";
+import { useThread } from "@/features/threads/Hooks/useThreads";
 import Threads from "@/features/threads/components/Threads";
 import FormThreads from "@/components/FormThreads";
 import { useSelector } from "react-redux";
@@ -18,7 +18,7 @@ export default function Home() {
 	const userId = user?.id;
 	// console.log(userId);
 
-	const { threads } = getThreads();
+	const { threads } = useThread();
 
 	return (
 		<Box className="scroll">

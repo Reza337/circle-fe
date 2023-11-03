@@ -54,7 +54,7 @@ function Navbar() {
 						<Box display={"flex"} alignItems="center">
 							<BiUserCircle />
 							<ListItem ms={3}>
-								<NavLink to="/">Profile.</NavLink>
+								<NavLink to="/profile">Profile.</NavLink>
 							</ListItem>
 						</Box>
 					</List>

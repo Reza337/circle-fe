@@ -8,6 +8,8 @@ export default function FormLogin() {
 		<FormControl
 			isRequired
 			display={"flex"}
+			mt={"100px"}
+			justifyContent={"center"}
 			flexDirection={"column"}
 			gap={3}
 			width={"350px"}
@@ -16,11 +18,15 @@ export default function FormLogin() {
 			border={"1px solid white"}
 			borderRadius={10}
 			padding={5}>
-			<Text color={"brand.green"} fontSize={"2xl"} fontWeight={"bold"}>
-				Connect
+			<Text
+				color={"green.400"}
+				fontSize={"4xl"}
+				fontWeight={"bold"}
+				margin={"0 auto"}>
+				Circle
 			</Text>
-			<Text fontSize={"2xl"} fontWeight={"bold"}>
-				Login Connect
+			<Text fontSize={"2xl"} fontWeight={"bold"} margin={"0 auto"}>
+				Login
 			</Text>
 			<Input placeholder="Email" name="email" onChange={handleChange} />
 			<Input

@@ -11,6 +11,8 @@ import Login from "./pages/Login";
 import DetailThread from "./pages/DetailThread";
 import Search from "./pages/Search";
 import Follows from "./pages/Follows";
+import Profile from "./pages/Profile";
+import DetailProfile from "./pages/DetailProfile";
 // import Spinner from "./components/Spinner";
 
 const theme = extendTheme({
@@ -108,6 +110,24 @@ function App() {
 								element={
 									<Main>
 										<Search />
+									</Main>
+								}
+							/>
+
+							<Route
+								path="/profile"
+								element={
+									<Main>
+										<Profile />
+									</Main>
+								}
+							/>
+
+							<Route
+								path="/detail-profile/:id"
+								element={
+									<Main>
+										<DetailProfile />
 									</Main>
 								}
 							/>
