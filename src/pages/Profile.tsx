@@ -1,13 +1,5 @@
 import { API } from "@/libs/api";
-import {
-	Avatar,
-	Box,
-	Card,
-	Flex,
-	HStack,
-	Stack,
-	Text,
-} from "@chakra-ui/react";
+import { Avatar, Box, Card, Flex, HStack, Stack, Text } from "@chakra-ui/react";
 import { useQuery } from "@tanstack/react-query";
 
 function Profile() {
@@ -15,7 +7,7 @@ function Profile() {
 		queryKey: ["Profile"],
 		queryFn: async () => {
 			const { data } = await API.get(`/user/auth`);
-			return data.data;
+			return data;
 		},
 		refetchInterval: 1000,
 	});
@@ -37,7 +29,11 @@ function Profile() {
 						p={1}
 						bg="blackAlpha.800"
 						rounded="full">
-						<Avatar w={"100px"} h={"100px"} src={Profile?.profile_picture} />
+						<Avatar
+							w={"100px"}
+							h={"100px"}
+							src={Profile?.data?.profile_picture}
+						/>
 					</Box>
 				</Box>
 
@@ -45,29 +41,33 @@ function Profile() {
 					<Flex gap={4}>
 						<Flex align={"center"}>
 							<Text mt={3} fontSize="2xl" fontWeight="semibold" color="white">
-								{Profile?.full_name}
+								{Profile?.data?.full_name}
 							</Text>
 						</Flex>
 						<Flex align={"center"} mt={"6px"}>
 							<Text mt={3} fontSize="lg" color="whiteAlpha.600">
-								@{Profile?.username}
+								@{Profile?.data?.username}
 							</Text>
 						</Flex>
 					</Flex>
 					<Text fontSize="sm" color="whiteAlpha.800">
-						{!Profile?.bio ? (
+						{!Profile?.data?.bio ? (
 							<Text>Bio Kosong</Text>
 						) : (
-							<Text>{Profile?.bio}</Text>
+							<Text>{Profile?.data?.bio}</Text>
 						)}
 					</Text>
 					<HStack fontSize={"md"} mt={"50px"}>
 						<HStack>
-							<Text color="whiteAlpha.800">{Profile?.followings?.length}</Text>
+							<Text color="whiteAlpha.800">
+								{Profile?.follow?.followings?.length}
+							</Text>
 							<Text color="whiteAlpha.600">Following</Text>
 						</HStack>
 						<HStack>
-							<Text color="whiteAlpha.800">{Profile?.followers.length}</Text>
+							<Text color="whiteAlpha.800">
+								{Profile?.follow?.followers.length}
+							</Text>
 							<Text color="whiteAlpha.600">Followers</Text>
 						</HStack>
 					</HStack>
